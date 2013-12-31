@@ -32,9 +32,12 @@ EEE;
 		return $fcast;
 	}
 
-	private function OuputData($data, $params) {
+	private function OuputData($data, $params = null) {
+	    $params = ($params==null)?array():$params;
             $format = isset($params['format'])?$params['format']:"array";
             $return = isset($params['return'])?$params['return']:true;
+            if(isset($params['format'])) unset($params['format']);
+            foreach($params as $k => $v) $data = $this->filter_data($data,$k,$v);
             $type = "application/json";
             switch($format) {
                     case "xml":
@@ -102,7 +105,6 @@ EEE;
     			$forecast[] = $tram;
     		}
     	}
-    	if(is_array($params)) foreach($params as $k => $v) if($k!="format") $forecast = $this->filter_data($forecast,$k,$v);
     	return $this->OuputData($forecast,$params);
     }
 

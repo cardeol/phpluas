@@ -102,7 +102,7 @@ EEE;
     			$forecast[] = $tram;
     		}
     	}
-    	if(is_array($params)) foreach($params as $k => $v) if($k!="output") $forecast = $this->filter_data($forecast,$k,$v);
+    	if(is_array($params)) foreach($params as $k => $v) if($k!="format") $forecast = $this->filter_data($forecast,$k,$v);
     	return $this->OuputData($forecast,$params);
     }
 

@@ -37,8 +37,6 @@ EEE;
     	$return = isset($params['return'])?$params['return']:true;
     	$type = "application/json";
     	switch($format) {
-    		case "array":
-    			return $data;
     		case "xml":
     			if(!$return) $type = "text/xml";
     			$xml = new SimpleXMLElement('<trams />');
@@ -55,8 +53,10 @@ EEE;
     			$data = $callback."(".json_encode($data).")";    			
     			break;
     		case "json":
+    			$data = json_encode($data);    
+    		case "array":
     		default:
-    			$data = json_encode($data);    			
+    			return $data;
     	}
     	if(!$return) {
     		header("Content-type: ".$type);

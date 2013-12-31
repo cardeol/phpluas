@@ -12,7 +12,7 @@ Method <b>getStationsInfo( <b>$stationcode<b>, <a href="#parameters">$params</a>
   
 ##parameters
 <ul>
-  <li><b>format</b>: Create an specific format for the information. Accepted values are "array", "xml", "json" or "jsonp".</li>
+  <li><b>format</b>: Create an specific format for the information. Accepted values are "array" (default), "xml", "json" or "jsonp".</li>
   <li><b>return</b>: If you would like to capture the output data use the return parameter. When this parameter is set to TRUE, it will return the information rather than print it. (true by default)</li>
   <li><b>dir</b>: used as filter for Inbound or Outbound trams. Accepted values are "in" or "out".</li>
   <li><b>dest</b>: set this parameter to filter destination by Name. I.E.  "dest" => "The Point"</li>
@@ -28,8 +28,8 @@ Method <b>getStationsInfo( <b>$stationcode<b>, <a href="#parameters">$params</a>
   #include "";
   $luas = new LuasApi();
   
-  // get Stations in json format
-  $stations = $luas->getStations( array( "format" => "json", "return" => true ) );
+  // get all Stations as array
+  $stations = $luas->getStations();
   
   
   // Output Times of Busaras station (inbound) with destination "The Point" (abv "tpt") in json.

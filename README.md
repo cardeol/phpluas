@@ -31,30 +31,42 @@ Method <b>getStationsInfo( <b>$stationcode<b>, <a href="#parameters">$params</a>
   include("class.luasapi.php");
   $luas = new LuasApi();
   
-  // get all Stations as array
-  $stations = $luas->getStations();
+  <b>// get all Stations as array in json (default)
+  $stations = $luas->getStations();</b>
+  
+    // Response:
+    [{"name":"St. Stephen's Green","line":"G","cycle":0,"car":0,"lat":53.339072,"lon":-6.261333},{"name":"Harcourt Street","line":"G","cycle":1,"car":0,"lat":53.333358,"lon":-6.26265}, ...]
   
   
-  // Output Times of Busaras station (inbound) with destination "The Point" (abv "tpt") in json.
-  $forecast = $luas->getForecast('bus', array("dir" => "in", "dest" => "tpt", "format" => "json"));
-  // Response:
-  // <b>[{"dir":"in","due":4,"dest":"The Point","eta":"03:07"},{"dir":"in","due":18,"dest":"The Point","eta":"03:21"}]</b>
+  <b>// Get all Stations of the Red Line
+  $stations = $luas->getStations( array( "line" => "R" ));</b>
+  
+    // Response:
+    // [{"name":"The Point","line":"R","cycle":0,"car":0,"lat":53.34835,"lon":-6.229258}, ... ]
+    
+  <b>// Output Times of Busaras station (inbound) with destination "The Point" (abv "tpt") in json.
+  $forecast = $luas->getForecast('bus', array("dir" => "in", "dest" => "tpt", "format" => "json"));</b>
+  
+    // Response:
+    // <b>[{"dir":"in","due":4,"dest":"The Point","eta":"03:07"},{"dir":"in","due":18,"dest":"The Point","eta":"03:21"}]</b>
   
   
-  // get Times of Busaras station with destination "The Point" in xml.
-  $luas->getForecast('bus', array("dir" => "in", "dest" => "The Point", "format" => "xml", "return" => false));
-  // Response:
-  &lt;?xml version=&quot;1.0&quot;?&gt; 
-  &lt;trams&gt; 
-      &lt;tram dir=&quot;in&quot; due=&quot;1&quot; dest=&quot;The Point&quot; eta=&quot;03:07&quot;/&gt; 
-      &lt;tram dir=&quot;in&quot; due=&quot;15&quot; dest=&quot;The Point&quot; eta=&quot;03:21&quot;/&gt;
-  &lt;/trams&gt;
+  <b>// get Times of Busaras station with destination "The Point" in xml.
+  $luas->getForecast('bus', array("dir" => "in", "dest" => "The Point", "format" => "xml", "return" => false));</b>
+    
+    // Response:
+    &lt;?xml version=&quot;1.0&quot;?&gt; 
+    &lt;trams&gt; 
+        &lt;tram dir=&quot;in&quot; due=&quot;1&quot; dest=&quot;The Point&quot; eta=&quot;03:07&quot;/&gt; 
+        &lt;tram dir=&quot;in&quot; due=&quot;15&quot; dest=&quot;The Point&quot; eta=&quot;03:21&quot;/&gt;
+    &lt;/trams&gt;
 
   
-  // output forecast of busaras station in json with padding
-  $luas->getForecast('bus', array( "format" => "json" ));
-  // Response:
-  // [{"dir":"in","due":0,"dest":"No trams forecast","eta":"03:13"},{"dir":"out","due":1,"dest":"Saggart","eta":"03:14"},{"dir":"out","due":8,"dest":"Saggart","eta":"03:21"}]
+  <b>// output forecast of busaras station in json with padding
+  $luas->getForecast('bus', array( "format" => "json" ));</b>
+  
+    // Response:
+    // [{"dir":"in","due":0,"dest":"No trams forecast","eta":"03:13"},{"dir":"out","due":1,"dest":"Saggart","eta":"03:14"},{"dir":"out","due":8,"dest":"Saggart","eta":"03:21"}]
   
   
 ?&gt;

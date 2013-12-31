@@ -38,17 +38,21 @@ EEE;
             $return = isset($params['return'])?$params['return']:true;
             if(isset($params['format'])) unset($params['format']);
             foreach($params as $k => $v) $data = $this->filter_data($data,$k,$v);
+
             $type = "application/json";
             switch($format) {
                     case "xml":
-                            if(!$return) $type = "text/xml";
-                            $xml = new SimpleXMLElement('<trams />');
-                            foreach($data as $im => $datatram) {
-                                    $tram = $xml->addChild("tram");
-                                    foreach($datatram as $k => $v) {
-                                            $tram->addAttribute($k,$v);        
-                                    }
-                            }
+                            if(!$return) $type = "text/xml";        
+                            $isstation = isset($data['con']);                            
+                            $child = $isstation ? "station"  : "tram";
+                            $xml = new SimpleXMLElement("<${child}s />");	
+                        	foreach($data as $abv => $stationinfo) {
+                        		$station = $xml->addChild($child);
+                        		if($isstation) $station->addAttribute("code",$abv);
+                        		foreach($stationinfo as $k => $v) {
+                        			$station->addAttribute($k,$v);	
+                        		}
+                        	}
                             $data = $xml->asXML();
                             break;
                     case "jsonp":
@@ -57,10 +61,11 @@ EEE;
                             break;
                     case "json":
                             $data = json_encode($data);   
-                            break; 
+                            break;                     
                     case "array":
                     default:
-                            return $data;
+                    	if(!$return) $data = print_r($data,true);
+                    	   
             }
             if(!$return) {
                     header("Content-type: ".$type);
@@ -68,7 +73,7 @@ EEE;
                     return true;
             }
             return $data;            
-    	}
+	}
 
 	private function get_url($url) {
 	    $ch = curl_init();

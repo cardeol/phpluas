@@ -19,6 +19,12 @@ EEE;
 
 	private function filter_data($data, $key, $value) {
 		$fcast = array();
+		if($key=="dest" && strlen($value) == 3) {
+			if(isset($this->stations[strtolower($value)])) {
+				$st = $this->stations[strtolower($value)];
+				$value = $st['name'];
+			}
+		}
 		foreach($data as $i => $journey) {
 			if(isset($journey[$key]) && strtolower($journey[$key])!=strtolower($value)) continue;
 			$fcast[] = $journey;
@@ -28,7 +34,7 @@ EEE;
 
 	private function OuputData($data, $params) {
     	$format = isset($params['format'])?$params['format']:"json";
-    	$return = isset($params['return'])?$params['return']:false;
+    	$return = isset($params['return'])?$params['return']:true;
     	$type = "application/json";
     	switch($format) {
     		case "array":
@@ -62,13 +68,13 @@ EEE;
 
 	private function get_url($url) {
 	    $ch = curl_init();
-      curl_setopt($ch, CURLOPT_HEADER, 0);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_URL, $url);
-      $data = curl_exec($ch);
-      curl_close($ch);
-      return $data;
-  }
+	      curl_setopt($ch, CURLOPT_HEADER, 0);
+	      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	      curl_setopt($ch, CURLOPT_URL, $url);
+	      $data = curl_exec($ch);
+	      curl_close($ch);
+	      return $data;
+	}
 
 	public function getStations($params = null) {
 		return $this->OuputData($this->stations,$params);		

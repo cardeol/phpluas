@@ -38,7 +38,6 @@ EEE;
             $return = isset($params['return'])?$params['return']:true;
             if(isset($params['format'])) unset($params['format']);
             foreach($params as $k => $v) $data = $this->filter_data($data,$k,$v);
-
             $type = "application/json";
             switch($format) {
                     case "xml":

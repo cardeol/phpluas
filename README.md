@@ -1,7 +1,7 @@
 phpluas
 =======
 
-Public PHP Tram API for Dublim Luas Trams.
+Public PHP Tram API for Dublim Luas Trams. It is a proxy implementation to create endpoints and reduce the original schema provided by the Luas API.
 
 ##usage
 

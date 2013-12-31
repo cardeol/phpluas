@@ -33,38 +33,39 @@ EEE;
 	}
 
 	private function OuputData($data, $params) {
-    	$format = isset($params['format'])?$params['format']:"json";
-    	$return = isset($params['return'])?$params['return']:true;
-    	$type = "application/json";
-    	switch($format) {
-    		case "xml":
-    			if(!$return) $type = "text/xml";
-    			$xml = new SimpleXMLElement('<trams />');
-    			foreach($data as $im => $datatram) {
-	    			$tram = $xml->addChild("tram");
-	    			foreach($datatram as $k => $v) {
-	    				$tram->addAttribute($k,$v);	
-	    			}
-	    		}
-    			$data = $xml->asXML();
-    			break;
-    		case "jsonp":
-    			$callback = isset($_GET['callback'])?$_GET['callback']:"";
-    			$data = $callback."(".json_encode($data).")";    			
-    			break;
-    		case "json":
-    			$data = json_encode($data);    
-    		case "array":
-    		default:
-    			return $data;
+            $format = isset($params['format'])?$params['format']:"array";
+            $return = isset($params['return'])?$params['return']:true;
+            $type = "application/json";
+            switch($format) {
+                    case "xml":
+                            if(!$return) $type = "text/xml";
+                            $xml = new SimpleXMLElement('<trams />');
+                            foreach($data as $im => $datatram) {
+                                    $tram = $xml->addChild("tram");
+                                    foreach($datatram as $k => $v) {
+                                            $tram->addAttribute($k,$v);        
+                                    }
+                            }
+                            $data = $xml->asXML();
+                            break;
+                    case "jsonp":
+                            $callback = isset($_GET['callback'])?$_GET['callback']:"";
+                            $data = $callback."(".json_encode($data).")";                            
+                            break;
+                    case "json":
+                            $data = json_encode($data);   
+                            break; 
+                    case "array":
+                    default:
+                            return $data;
+            }
+            if(!$return) {
+                    header("Content-type: ".$type);
+                    echo($data);
+                    return true;
+            }
+            return $data;            
     	}
-    	if(!$return) {
-    		header("Content-type: ".$type);
-    		echo($data);
-    		return true;
-    	}
-    	return $data;    	
-    }
 
 	private function get_url($url) {
 	    $ch = curl_init();

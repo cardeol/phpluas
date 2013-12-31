@@ -1,4 +1,16 @@
 phpluas
 =======
 
-Public Luas API for PHP
+Public PHP Tram API for Dublim Luas Trams.
+
+##usage
+
+<pre>
+<code>
+&lt;?php
+  #include "";
+  $luas = new LuasApi();
+?&gt;
+</code>
+</pre>
+

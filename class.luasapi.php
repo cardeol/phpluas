@@ -91,7 +91,6 @@ EEE;
     		$jattrib = $journey->attributes();
     		$direction = ((string) $jattrib['name'])=="Inbound"?"in":"out";    		
     		foreach($journey->tram as $xmltram) {
-    			$tram = array();
     			$attrTram = $xmltram->attributes();
     			$due = (int) $attrTram['dueMins'];
     			$tram = array(

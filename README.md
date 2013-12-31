@@ -6,7 +6,8 @@ Public PHP Tram API for Dublim Luas Trams.
 ##usage
 
 Method <b>getStations( <a href="#parameters">$params</a> (optional))</b>
-  
+  parameters: 
+     line: [G,R] 
 
 Method <b>getStationsInfo( <b>$stationcode<b>, <a href="#parameters">$params</a> (optional))</b>
   

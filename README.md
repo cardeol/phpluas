@@ -35,7 +35,7 @@ Method <b>getStationsInfo( <b>$stationcode<b>, <a href="#parameters">$params</a>
   $stations = $luas->getStations();</b>
   
     // Response:
-    [{"name":"St. Stephen's Green","line":"G","cycle":0,"car":0,"lat":53.339072,"lon":-6.261333},{"name":"Harcourt Street","line":"G","cycle":1,"car":0,"lat":53.333358,"lon":-6.26265}, ...]
+    [{"name":"St. Stephen's Green","line":"G","cycle":0,"car":0,"lat":53.339072,"lon":-6.261333}, ...]
   
   
   <b>// Get all Stations of the Red Line

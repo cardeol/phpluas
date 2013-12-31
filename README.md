@@ -32,6 +32,14 @@ Method <b>getStationsInfo( <b>$stationcode<b>, <a href="#parameters">$params</a>
   $stations = $luas->getStations( array( "format" => "json", "return" => true ) );
   
   
+  // Output Times of Busaras station (inbound) with destination "The Point" (abv "tpt") in jsonp.
+  $luas->getForecast('bus', array("dir" => "in", "dest" => "tpt", "format" => "jsonp"));
+  
+  // get Times of Busaras station with destination "The Point" in json.
+  $forecast = $luas->getForecast('bus', array("dir" => "in", "dest" => "The Point", "format" => "json", "return" => false));
+  
+  // output forecast of busaras station in json with padding
+  $luas->getForecast('bus', array( "format" => "jsonp" ));
   
 ?&gt;
 </code>

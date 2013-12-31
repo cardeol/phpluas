@@ -34,6 +34,9 @@ Method <b>getStationsInfo( <b>$stationcode<b>, <a href="#parameters">$params</a>
   
   // Output Times of Busaras station (inbound) with destination "The Point" (abv "tpt") in json.
   $luas->getForecast('bus', array("dir" => "in", "dest" => "tpt", "format" => "json"));
+  // Response:
+  // <b>[{"dir":"in","due":4,"dest":"The Point","eta":"03:07"},{"dir":"in","due":18,"dest":"The Point","eta":"03:21"}]</b>
+  
   
   // get Times of Busaras station with destination "The Point" in xml.
   $forecast = $luas->getForecast('bus', array("dir" => "in", "dest" => "The Point", "format" => "xml", "return" => false));

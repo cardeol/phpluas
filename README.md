@@ -39,10 +39,20 @@ Method <b>getStationsInfo( <b>$stationcode<b>, <a href="#parameters">$params</a>
   
   
   // get Times of Busaras station with destination "The Point" in xml.
-  $forecast = $luas->getForecast('bus', array("dir" => "in", "dest" => "The Point", "format" => "xml", "return" => false));
+  $luas->getForecast('bus', array("dir" => "in", "dest" => "The Point", "format" => "xml", "return" => false));
+  // Response:
+  &lt;?xml version=&quot;1.0&quot;?&gt; 
+  &lt;trams&gt; 
+      &lt;tram dir=&quot;in&quot; due=&quot;1&quot; dest=&quot;The Point&quot; eta=&quot;03:07&quot;/&gt; 
+      &lt;tram dir=&quot;in&quot; due=&quot;15&quot; dest=&quot;The Point&quot; eta=&quot;03:21&quot;/&gt;
+  &lt;/trams&gt;
+
   
   // output forecast of busaras station in json with padding
-  $luas->getForecast('bus', array( "format" => "jsonp" ));
+  $luas->getForecast('bus', array( "format" => "json" ));
+  // Response:
+  // [{"dir":"in","due":0,"dest":"No trams forecast","eta":"03:13"},{"dir":"out","due":1,"dest":"Saggart","eta":"03:14"},{"dir":"out","due":8,"dest":"Saggart","eta":"03:21"}]
+  
   
 ?&gt;
 </code>

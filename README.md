@@ -25,7 +25,7 @@ Method <b>getStationsInfo( <b>$stationcode<b>, <a href="#parameters">$params</a>
 <pre>
 <code>
 &lt;?php
-  #include "";
+  include("class.luasapi.php");
   $luas = new LuasApi();
   
   // get all Stations as array
